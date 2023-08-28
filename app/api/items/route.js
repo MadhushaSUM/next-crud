@@ -43,6 +43,11 @@ export const DELETE = async (req, res) => {
     await query({
         query:"DELETE FROM items WHERE id= ?",
         values: [data.id],
+    }, function (err, data) {
+        if (err) {
+            console.log(err);
+            return new Response(JSON.stringify(err), { status:501 });
+        }
     });
 
     return new Response("Deleted", { status:200 });

@@ -22,12 +22,18 @@ export default function Home() {
     const addItem = async (e: any) => {
         e.preventDefault();
 
-        await fetch("/api/items", {
+        const response = await fetch("/api/items", {
             method: "POST",
             body: JSON.stringify({
                 text: item,
             }), 
-        });        
+        });
+        
+        if (response.ok) {
+            alert("Item added");            
+        } else {
+            alert("Error occured");
+        }
     }
 
     const updateText = (e: any) => {
@@ -56,12 +62,18 @@ export default function Home() {
     const deleteItem = async (e: any) => {
         e.preventDefault();
 
-        await fetch("/api/items", {
+        const response = await fetch("/api/items", {
             method: "DELETE",
             body: JSON.stringify({
                 id: itemIdForDelete,
             }), 
-        });        
+        });
+        
+        if (response.ok) {
+            alert("Item deleted");            
+        } else {
+            alert("Error occured");
+        }
     }
     const updateTextIdForDelete = (e: any) => {
         setItemIdForDelete(e.target.value);
@@ -74,7 +86,7 @@ export default function Home() {
                     Next.js CRUD Application
                 </h1>
 
-                <div className='flex flex-row gap-2 p-5'>
+                <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2 p-5'>
                     <div className='flex-1 border-2 rounded-lg'>
                         <h1 className='text-center' >
                             CREATE
